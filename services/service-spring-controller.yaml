@@ -1,0 +1,14 @@
+inputSpec: spec/service.yaml
+generatorName: spring
+outputDir: out/spring-controller
+additionalProperties:
+  modelPackage: com.mamezou_tech.example.controller.model
+  apiPackage: com.mamezou_tech.example.controller.api
+  invokerPackage: com.mamezou_tech.example.controller.api
+  groupId: com.mamezou-tech.example
+  dateLibrary: java8
+  java8: true
+  configPackage: com.mamezou_tech.example.controller.configuration
+  library: spring-boot
+  artifactId: example-service-controller
+  snapshotVersion: true
