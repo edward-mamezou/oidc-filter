@@ -115,7 +115,7 @@ public class OpenIDTokenFilter implements Filter {
 
         try {
             Map<String, Object> payload = verify(idToken, new HashMap<String, Algorithm>());
-            logger.info((String) payload.get("customRole"));
+            logger.info((String) payload.get("custom:role"));
         } catch (Exception e) {
             logger.error("error", e);
             HttpServletResponse res = (HttpServletResponse) response;
