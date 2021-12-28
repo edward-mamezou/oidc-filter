@@ -9,6 +9,8 @@ public class OidcProperties {
 
     private String poolid;
 
+    private String baseUrl;
+
     public String getRegion() {
         return region;
     }
@@ -24,4 +26,13 @@ public class OidcProperties {
     public void setPoolid(String poolid) {
         this.poolid = poolid;
     }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
 }

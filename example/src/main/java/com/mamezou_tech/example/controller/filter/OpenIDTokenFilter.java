@@ -111,18 +111,25 @@ public class OpenIDTokenFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         String idToken = req.getHeader("Authorization");
-        logger.info(idToken);
+        logger.debug("Authorization: " + idToken);
 
+        Map<String, Object> payload = null;
         try {
-            Map<String, Object> payload = verify(idToken, new HashMap<String, Algorithm>());
-            logger.info((String) payload.get("custom:role"));
+            payload = verify(idToken, new HashMap<String, Algorithm>());
+            if (payload == null) {
+                HttpServletResponse res = (HttpServletResponse) response;
+                res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+            }
         } catch (Exception e) {
             logger.error("error", e);
             HttpServletResponse res = (HttpServletResponse) response;
-            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
+        // request の authorizer.claims に JWT のペイロードの Map を設定して後続のフィルターに渡す
+        request.setAttribute("authorizer.claims", payload);
         chain.doFilter(request, response);
     }
 }
