@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exampleapp
+  labels:
+    app: example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "exampleapp"
+        dapr.io/app-port: "8080"
+        dapr.io/config: "pipeline"
+        dapr.io/sidecar-listen-addresses: "0.0.0.0"
+    spec:
+      containers:
+      - name: example
+        image: example:latest
+        env:
+        - name: OIDC_ISSUERURL
+          value: https://cognito-idp.<REGION>.amazonaws.com/<POOL ID>
+        - name: OIDC_BASEURL
+          value: http://localhost:8080
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
