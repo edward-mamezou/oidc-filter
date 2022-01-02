@@ -23,9 +23,9 @@ public class FilterConfiguration {
 
     @Bean
     public FilterRegistrationBean<OpenIDTokenFilter> openIDTokenFilter() {
-        logger.info("created OpenIDTokenFilter(" + properties.getRegion() + "," + properties.getPoolid() + ")");
+        logger.info("created OpenIDTokenFilter(" + properties.getIssuerURL() + ")");
         FilterRegistrationBean<OpenIDTokenFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new OpenIDTokenFilter(properties.getRegion(), properties.getPoolid()));
+        registrationBean.setFilter(new OpenIDTokenFilter(properties.getIssuerURL()));
         registrationBean.setOrder(1);
         return registrationBean;
     }

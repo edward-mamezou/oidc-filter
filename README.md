@@ -8,8 +8,7 @@
 ```
 $ mvn clean install
 $ cd example
-$ export OIDC_REGION=<Cognito のリージョン (例: ap-northeast-1)>
-$ export OIDC_POOLID=<Cognito のプールID>
+$ export OIDC_ISSUERURL=https://cognito-idp.<REGION>.amazonaws.com/<POOL ID>
 $ export OIDC_BASEURL=<呼び出すサービスのベースのURL>
 $ gradle clean bootRun 
 ```

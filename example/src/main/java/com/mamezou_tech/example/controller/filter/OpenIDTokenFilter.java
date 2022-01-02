@@ -34,8 +34,8 @@ public class OpenIDTokenFilter implements Filter {
 
     private final String jwksJsonUrl;
 
-    public OpenIDTokenFilter(String region, String poolid) {
-        this.jwksJsonUrl = "https://cognito-idp." + region + ".amazonaws.com/" + poolid + "/.well-known/jwks.json";
+    public OpenIDTokenFilter(String issuerURL) {
+        this.jwksJsonUrl = issuerURL + "/.well-known/jwks.json";
         logger.info(jwksJsonUrl);
     }
 

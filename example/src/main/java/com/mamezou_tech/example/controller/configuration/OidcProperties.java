@@ -5,26 +5,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("oidc")
 public class OidcProperties {
 
-    private String region;
-
-    private String poolid;
+    private String issuerURL;
 
     private String baseUrl;
 
-    public String getRegion() {
-        return region;
+    public String getIssuerURL() {
+        return issuerURL;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getPoolid() {
-        return poolid;
-    }
-
-    public void setPoolid(String poolid) {
-        this.poolid = poolid;
+    public void setIssuerURL(String issuerURL) {
+        this.issuerURL = issuerURL;
     }
 
     public String getBaseUrl() {
