@@ -13,9 +13,8 @@ public class OpenIDTokenFilterTest {
 
     @Test
     public void test() throws Exception {
-        String region = System.getenv("OIDC_REGION");
-        String poolid = System.getenv("OIDC_POOLID");
-        OpenIDTokenFilter filter = new OpenIDTokenFilter(region, poolid);
+        String issuerurl = System.getenv("OIDC_ISSUERURL");
+        OpenIDTokenFilter filter = new OpenIDTokenFilter(issuerurl);
         Map<String, KeyItem> keys = filter.openIDConnectGetKeys();
         Map<String, Algorithm> algorithms = filter.toAlgorithms(keys);
         logger.info(algorithms.toString());
