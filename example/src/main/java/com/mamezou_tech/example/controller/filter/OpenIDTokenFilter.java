@@ -34,6 +34,9 @@ public class OpenIDTokenFilter implements Filter {
 
     private final String jwksJsonUrl;
 
+    private final String bearerPrefix = "bearer ";
+    private final int bearerPrefixLength = bearerPrefix.length();
+
     public OpenIDTokenFilter(String issuerURL) {
         this.jwksJsonUrl = issuerURL + "/.well-known/jwks.json";
         logger.info(jwksJsonUrl);
@@ -110,20 +113,27 @@ public class OpenIDTokenFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        String idToken = req.getHeader("Authorization");
-        logger.debug("Authorization: " + idToken);
+        HttpServletResponse res = (HttpServletResponse) response;
+        
+        String authHeader = req.getHeader("Authorization");
+        logger.info("Authorization: " + authHeader);
+        if (authHeader == null || !authHeader.toLowerCase().startsWith(bearerPrefix)) {
+                res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+        }
 
+        String idToken = authHeader.substring(bearerPrefixLength);
+        logger.info("Token: " + idToken);
+        
         Map<String, Object> payload = null;
         try {
             payload = verify(idToken, new HashMap<String, Algorithm>());
             if (payload == null) {
-                HttpServletResponse res = (HttpServletResponse) response;
                 res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
         } catch (Exception e) {
             logger.error("error", e);
-            HttpServletResponse res = (HttpServletResponse) response;
             res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
