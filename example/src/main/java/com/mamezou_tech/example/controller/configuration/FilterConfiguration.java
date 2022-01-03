@@ -1,9 +1,7 @@
 package com.mamezou_tech.example.controller.configuration;
 
-import com.mamezou_tech.example.controller.filter.InvokeFilter;
 import com.mamezou_tech.example.controller.filter.OpenIDTokenFilter;
 import com.mamezou_tech.example.controller.filter.RBACFilter;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +34,6 @@ public class FilterConfiguration {
         FilterRegistrationBean<RBACFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new RBACFilter());
         registrationBean.setOrder(2);
-        return registrationBean;
-    }
-
-    @Bean
-    public FilterRegistrationBean<InvokeFilter> invokeFilter() {
-        logger.info("created InvokeFilter()");
-        FilterRegistrationBean<InvokeFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new InvokeFilter(properties.getBaseUrl()));
-        registrationBean.setOrder(3);
         return registrationBean;
     }
 }

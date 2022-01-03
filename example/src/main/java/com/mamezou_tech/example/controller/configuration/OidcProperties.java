@@ -7,8 +7,6 @@ public class OidcProperties {
 
     private String issuerURL;
 
-    private String baseUrl;
-
     public String getIssuerURL() {
         return issuerURL;
     }
@@ -16,13 +14,4 @@ public class OidcProperties {
     public void setIssuerURL(String issuerURL) {
         this.issuerURL = issuerURL;
     }
-
-    public String getBaseUrl() {
-        return baseUrl;
-    }
-
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
 }

@@ -26,8 +26,6 @@ spec:
         env:
         - name: OIDC_ISSUERURL
           value: https://cognito-idp.<REGION>.amazonaws.com/<POOL ID>
-        - name: OIDC_BASEURL
-          value: http://localhost:8080
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
