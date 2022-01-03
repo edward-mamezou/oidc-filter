@@ -1,9 +1,9 @@
-このサンプルのコンセプト
+サンプル
 =====
 
-![図](overview.png)
+# サンプルアプリケーションのビルド
 
-# ビルド方法
+## ビルド方法
 
 ```
 $ mvn clean install
@@ -14,7 +14,7 @@ $ docker build . -t example
 $ docker run -e OIDC_ISSUERURL=$OIDC_ISSUERURL -p 8080:8080 example
 ```
 
-# 実行
+## テスト
 
 ```
 curl -H 'Authorization: Bearer <ID Token>' http://localhost:8080/hello
