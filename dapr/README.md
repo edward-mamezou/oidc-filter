@@ -33,5 +33,5 @@ kubectl apply -f deploy/ingress.yaml
 # Test
 
 ```
-curl -v -H 'Authorization: Bearer <ID TOKEN> http://<EXTERNAL IP>/v1.0/invoke/exampleapp/method/hello
+curl -v -H 'Authorization: Bearer <ID TOKEN>' http://<EXTERNAL IP>/v1.0/invoke/exampleapp/method/hello
 ```
