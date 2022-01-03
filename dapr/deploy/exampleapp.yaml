@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: example
-        image: example:latest
+        image: takesection/example:latest
         env:
         - name: OIDC_ISSUERURL
           value: https://cognito-idp.<REGION>.amazonaws.com/<POOL ID>

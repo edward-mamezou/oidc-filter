@@ -7,6 +7,6 @@ spec:
   version: v1
   metadata:
   - name: clientId
-    value: "<your client ID>"
+    value: "<CLIENT ID>"
   - name: issuerURL
     value: "https://cognito-idp.<REGION>.amazonaws.com/<POOL ID>"
