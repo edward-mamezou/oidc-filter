@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM eclipse-temurin:11
 
 COPY build/libs/example-0.1.0-SNAPSHOT.jar /app.jar
 EXPOSE 8080
