@@ -18,17 +18,36 @@ static_resources:
               domains:
               - "*"
               routes:
-                match:
+              - match:
                   prefix: /
                 route:
                   cluster: service
           http_filters:
+          - name: envoy.filters.http.jwt_authn
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.jwt_authn.v3.JwtAuthentication
+              providers:
+                amazoncognito:
+                  issuer: "https://cognito-idp.<REGION>.amazonaws.com/<POOL ID>"
+                  audiences:
+                  - "<CLIENT ID>"
+                  forward: true
+                  remote_jwks:
+                    http_uri:
+                      uri: "https://cognito-idp.<REGION>.amazonaws.com/<POOL ID>/.well-known/jwks.json"
+                      cluster: cognito-jwks
+                      timeout: 5s
+                    cache_duration: 600s
+              rules:
+              - match:
+                  prefix: /
+                requires:
+                  provider_name: amazoncognito
           - name: envoy.filters.http.router
 
   clusters:
   - name: service
     type: STRICT_DNS
-    lb_policy: ROUND_ROBIN
     load_assignment:
       cluster_name: service
       endpoints:
@@ -38,6 +57,20 @@ static_resources:
               socket_address:
                 address: example 
                 port_value: 8080
+  - name: cognito-jwks
+    type: STRICT_DNS
+    dns_lookup_family: V4_ONLY
+    load_assignment:
+      cluster_name: cognito-jwks 
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: cognito-idp.<REGION>.amazonaws.com 
+                port_value: 443
+    transport_socket:
+      name: envoy.transport_sockets.tls
 
 admin:
   address:
