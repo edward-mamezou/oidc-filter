@@ -6,7 +6,7 @@ docker network create envoy
 ```
 
 ```
-docker run -it --name example --network=envoy -e OIDC_ISSUERURL=https://cognito-idp.<REGION>.amazonaws.com/<POOL ID> --rm takesection/example
+docker run -it --name example --network=envoy --rm takesection/example:test
 ```
 
 ```
