@@ -1,6 +1,12 @@
 Envoy
 ===
 
+2022年1月21日現在、opa のイメージに linux/arm64 がないため、別のサーバで動かす必要がある。
+
+```
+docker run -it --rm -p 9191:9191 -p 8181:8181 -v `pwd`:/work openpolicyagent/opa:latest-envoy run --server --log-level debug -c /work/config.yaml /work/opa.rego
+```
+
 ```
 docker network create envoy
 ```
