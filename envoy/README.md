@@ -24,3 +24,7 @@ docker run -it --name envoy --network=envoy -v `pwd`/front-envoy.yaml:/etc/front
 ```
 curl -H 'Authorization: Bearer <ID Token>' http://localhost:8080/hello
 ```
+
+```
+curl -v -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' http://localhost:8080/hello
+```
