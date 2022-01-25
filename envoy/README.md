@@ -9,6 +9,8 @@ Envoy
 docker run -it --rm -p 9191:9191 -p 8181:8181 -v `pwd`:/work openpolicyagent/opa:latest-envoy run --server --log-level debug -c /work/config.yaml /work/opa.rego
 ```
 
+ここから下は、linux/arm64 のコンテナランタイムで実行する。
+
 ```
 docker network create envoy
 ```
